@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>香菇爸｜陪你養貓不孤單</title>
+  <meta name="description" content="香菇爸的養貓選物，陪每位毛家長把日常照護做得更安心。精選藍藻益生菌與高端鮮食餐，與你分享養貓日常。" />
+  <meta property="og:title" content="香菇爸｜陪你養貓不孤單" />
+  <meta property="og:description" content="香菇爸的養貓選物，陪每位毛家長把日常照護做得更安心。" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Noto Sans TC', sans-serif; }
+    .card-shadow { box-shadow: 4px 4px 0px 0px rgba(60,40,20,0.05); }
+  </style>
+</head>
+<body class="bg-[#FAF7F0] text-stone-800">
+
+  <!-- 法人聲明 topbar -->
+  <div class="w-full bg-stone-800 text-stone-100 text-[11px] sm:text-xs text-center py-1.5 px-3">
+    本網站由「摩根新時代微創網路企業社」經營・統一編號 42034093
+  </div>
+
+  <!-- sticky header -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-stone-200 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🍄</span>
+        <span class="text-lg sm:text-xl font-black tracking-tight">香菇爸</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://www.facebook.com/lovemushroom55" target="_blank" title="Facebook"
+           class="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 transition text-lg">📘</a>
+        <a href="https://instagram.com/love_mushroom55" target="_blank" title="Instagram"
+           class="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 hover:bg-stone-200 transition text-lg">📸</a>
+        <a href="https://lin.ee/9M4i0Vj" target="_blank"
+           class="text-sm font-bold bg-[#06C755] text-white px-3 sm:px-4 py-2 rounded-full hover:opacity-90 transition whitespace-nowrap">
+          加 LINE
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section class="max-w-6xl mx-auto px-4 pt-12 pb-6 text-center">
+    <div class="text-5xl sm:text-6xl mb-4">🐱🍄</div>
+    <h1 class="text-3xl sm:text-4xl font-black mb-3">香菇爸嚴選商城</h1>
+    <p class="text-lg sm:text-xl text-stone-600 font-medium">陪你養貓不孤單，也顧好你的生活</p>
+    <p class="max-w-xl mx-auto mt-4 text-stone-500 leading-relaxed">
+      從毛孩的主食、保養，到你的日常生活好物，<br class="hidden sm:block" />
+      每一樣都是香菇爸親自挑選、自己也在用的。
+    </p>
+  </section>
+
+  <!-- 折扣碼解鎖優惠價 -->
+  <div class="max-w-6xl mx-auto px-4 pb-6">
+    <div id="codeBox" class="bg-rose-50 border border-rose-200 rounded-2xl px-4 py-4 text-center">
+      <p class="text-rose-600 font-black text-base sm:text-lg mb-3">🎉 輸入折扣碼，解鎖你的專屬優惠價！</p>
+      <div class="flex justify-center gap-2 max-w-sm mx-auto">
+        <input id="codeInput" type="text" inputmode="numeric" placeholder="在這裡輸入折扣碼"
+          class="flex-1 px-4 py-2 rounded-xl border border-rose-300 text-center font-bold tracking-widest focus:outline-none focus:border-rose-500" />
+        <button id="unlockBtn" class="bg-rose-600 text-white font-bold px-5 py-2 rounded-xl hover:opacity-90 transition whitespace-nowrap">解鎖優惠</button>
+      </div>
+      <p id="codeMsg" class="text-xs mt-2 text-rose-400">下方為市售價・輸入折扣碼後跳出優惠價</p>
+    </div>
+  </div>
+
+  <!-- 分類篩選 -->
+  <nav class="sticky top-[57px] z-30 bg-[#FAF7F0]/95 backdrop-blur border-y border-stone-200">
+    <div class="max-w-6xl mx-auto px-3 py-3 flex gap-2 overflow-x-auto" id="filterBar"></div>
+  </nav>
+
+  <!-- 商品 grid -->
+  <main class="max-w-6xl mx-auto px-4 py-10">
+    <div id="grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+  </main>
+
+  <!-- 三步驟下單 -->
+  <section class="py-20 border-t border-stone-200 bg-white">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-black text-center mb-12">簡單三步驟，好物到你家</h2>
+      <div class="grid sm:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-4xl mb-3">🛒</div>
+          <h3 class="font-bold text-lg mb-1">1. 線上選購</h3>
+          <p class="text-stone-500 text-sm">瀏覽目錄，挑選你和貓主子需要的好物。</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-3">💬</div>
+          <h3 class="font-bold text-lg mb-1">2. LINE 私訊下單</h3>
+          <p class="text-stone-500 text-sm">點按鈕，直接用 LINE 官方帳號告訴我們。</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-3">📦</div>
+          <h3 class="font-bold text-lg mb-1">3. 快速出貨</h3>
+          <p class="text-stone-500 text-sm">確認訂單後，火速為你和毛孩寄出。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 社群區 -->
+  <section class="py-16 bg-[#FAF7F0]">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-xl font-black mb-6">在這些地方找到香菇爸</h2>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="https://lin.ee/9M4i0Vj" target="_blank" class="px-5 py-3 rounded-2xl bg-white border border-stone-200 card-shadow font-bold hover:-translate-y-0.5 transition">💚 LINE 官方帳號</a>
+        <a href="https://www.facebook.com/lovemushroom55" target="_blank" class="px-5 py-3 rounded-2xl bg-white border border-stone-200 card-shadow font-bold hover:-translate-y-0.5 transition">📘 Facebook</a>
+        <a href="https://instagram.com/love_mushroom55" target="_blank" class="px-5 py-3 rounded-2xl bg-white border border-stone-200 card-shadow font-bold hover:-translate-y-0.5 transition">📸 Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer：法人背書 + 統編（過審核心） -->
+  <footer class="py-12 bg-stone-800 text-stone-300">
+    <div class="max-w-4xl mx-auto px-4 text-center text-sm leading-relaxed">
+      <div class="text-2xl font-black text-white mb-2">🍄 香菇爸</div>
+      <p class="text-stone-400 mb-6">陪你養貓不孤單 — 和每位毛家長分享養貓日常與安心好物。</p>
+
+      <div class="border-t border-stone-700 pt-6 text-stone-400 text-[13px] leading-7">
+        本網站（香菇爸）由「摩根新時代微創網路企業社」經營，<br />
+        並透過 Facebook、Instagram、LINE 官方帳號及官方網站，
+        分享養貓日常、毛孩照護等內容，並提供相關商品與服務資訊。<br />
+        公司名稱：摩根新時代微創網路企業社（統一編號：42034093）<br />
+        負責人：陳翊綸｜登記機關：新竹市政府
+      </div>
+      <p class="mt-6 text-stone-500 text-xs">© 2026 香菇爸 MUSHROOM DAD. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       商品資料 — 之後只要改這個 array 就能換圖 / 改價 / 加商品
+       img 先用佔位，請換成自己的商品照（正方形 1:1，建議 800x800）
+       ⚠️ 合規：藍藻益生菌不可寫療效 / 器官 / 免疫 / 吸收 等宣稱
+       ========================================================= */
+    const LINE_ADD = "https://lin.ee/9M4i0Vj"; // 香菇綸爸 官方帳號（專屬ID @mushroom131 / 基本ID @507tuqaf）
+    const PRODUCTS = [
+      // 主食
+      { cat: "主食",     name: "毛孩高端餐 專利凍乾益菌糧 1.15Kg／包（貓寶／狗寶營養餐）", price: 1100, original: 1680, badge: "熱銷",   img: "images/P01.jpg" },
+      // 營養保養
+      { cat: "營養保養", name: "金牌鏟屎官 藍藻益生菌膠囊（30粒／瓶）", price: 1180, original: 1680, badge: "", img: "images/P02.jpg" },
+      { cat: "營養保養", name: "寵物皮麗舒噴霧 100ml", price: 1250, original: 1800, badge: "", img: "images/P03.jpg" },
+      // 寵物用品
+      { cat: "寵物用品", name: "呆丸喵 胜肽豆腐貓砂 2.5kg（6包／箱）", price: 1320, original: 1980, badge: "台灣製", img: "images/P04.jpg", note: "100%台灣製造・食品級豆渣・獨家胜肽益菌配方" },
+      // 生活用品
+      { cat: "生活用品", name: "病毒盾 VirusOUT 菌切錠（12錠／盒）", price: 1980, original: 3600, badge: "", img: "images/P05.jpg", note: "錠狀好攜帶分裝・人／寵／環境三友善" },
+      { cat: "生活用品", name: "五月花 210抽（48包／箱）", price: 1080, original: 2180, badge: "整箱超值", img: "images/P06.jpg", note: "原生紙漿・FSC 森林驗證・可分散丟馬桶" },
+      // 美容保養
+      { cat: "美容保養", name: "LOVEISDERMA 愛斯德瑪 友善海洋防曬乳", price: 590, original: 850, badge: "", img: "images/P07.jpg", note: "2 條 $1080（平均540）／4 條 $2060" },
+      // 舒壓保養
+      { cat: "舒壓保養", name: "朵妮朵絲 玫瑰／茉莉精露（臉部保養）", price: 650, original: 680, badge: "", img: "images/P08.jpg", note: "玫瑰／茉莉可選・2 瓶 $1200／3 瓶 $1750" },
+      { cat: "舒壓保養", name: "V臉精華油組（1094 精華油＋溫潤經絡梳）", price: 2380, original: 2770, badge: "", img: "images/P09.jpg", note: "1 瓶精華油＋經絡梳・2 組 $4560" },
+      { cat: "舒壓保養", name: "美體全能油刷刷組（全能油2瓶＋經絡刷）", price: 1900, original: 2640, badge: "", img: "images/P10.jpg", note: "1 組 2 瓶＋經絡刷・2 組 $4560" },
+      // 美食
+      { cat: "美食",     name: "好食光 海苔脆魚捲（1盒）", price: 300, original: 400, badge: "", img: "images/P11.jpg", note: "2 盒 $500／4 盒 $930／16 盒 $3360／24 盒 $4800" },
+      { cat: "美食",     name: "酷覓星 香鬆起士糙米捲（奇亞籽＋彩虹藜麥）", price: 248, original: 300, badge: "iTQi 二星", img: "images/P12.jpg", note: "2 包 $496／4 包 $922／10 包 $2110／24 包 $4912" },
+    ];
+
+    const grid = document.getElementById('grid');
+    const filterBar = document.getElementById('filterBar');
+    const cats = ["全部商品", ...[...new Set(PRODUCTS.map(p => p.cat))]];
+    let active = "全部商品";
+    const CODE = "119208";
+    let unlocked = false;
+
+    function lineLink(name) {
+      return LINE_ADD; // 點商品 → 加 LINE 官方帳號詢問 / 下單
+    }
+
+    function render() {
+      grid.innerHTML = PRODUCTS
+        .filter(p => active === "全部商品" || p.cat === active)
+        .map(p => `
+          <a href="${lineLink(p.name)}" target="_blank"
+             class="group bg-white rounded-2xl overflow-hidden border border-stone-200/60 card-shadow hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col">
+            <div class="relative">
+              <img src="${p.img}" alt="${p.name}" class="w-full aspect-square object-cover" />
+              ${p.badge ? `<span class="absolute top-2 left-2 bg-rose-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">${p.badge}</span>` : ""}
+            </div>
+            <div class="p-3 sm:p-4 flex flex-col flex-1">
+              <span class="text-[11px] text-stone-400 mb-1">${p.cat}</span>
+              <h3 class="font-bold text-sm sm:text-base leading-snug mb-2 flex-1">${p.name}</h3>
+              <div class="flex items-end gap-2 flex-wrap min-h-[28px]">
+                ${unlocked
+                  ? `<span class="text-rose-600 font-black text-lg">$${p.price}</span>
+                     <span class="text-stone-400 line-through text-xs">市售 $${p.original}</span>`
+                  : `<span class="text-stone-800 font-black text-lg">市售 $${p.original}</span>
+                     <span class="text-rose-500 text-xs font-bold">🔒 折扣碼再優惠</span>`}
+              </div>
+              ${p.note ? `<p class="text-[11px] text-stone-400 mt-1 leading-snug">${p.note}</p>` : ""}
+              <span class="mt-3 text-center text-sm font-bold bg-[#06C755] text-white py-2 rounded-xl group-hover:opacity-90">LINE 詢問 / 下單 🚀</span>
+            </div>
+          </a>
+        `).join('');
+    }
+
+    function renderFilters() {
+      filterBar.innerHTML = cats.map(c => `
+        <button data-cat="${c}"
+          class="whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold border transition
+          ${c === active ? 'bg-stone-800 text-white border-stone-800' : 'bg-white text-stone-600 border-stone-200 hover:border-stone-400'}">
+          ${c}
+        </button>`).join('');
+      filterBar.querySelectorAll('button').forEach(b =>
+        b.addEventListener('click', () => { active = b.dataset.cat; renderFilters(); render(); }));
+    }
+
+    // 折扣碼解鎖
+    const codeInput = document.getElementById('codeInput');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const codeMsg = document.getElementById('codeMsg');
+    const codeBox = document.getElementById('codeBox');
+    function tryUnlock() {
+      if (codeInput.value.trim() === CODE) {
+        unlocked = true;
+        codeBox.className = "bg-green-50 border border-green-300 rounded-2xl px-4 py-4 text-center";
+        codeMsg.textContent = "✅ 優惠價已解鎖！下方顯示的就是你的專屬折扣價";
+        codeMsg.className = "text-xs mt-2 text-green-600 font-bold";
+        render();
+      } else {
+        codeMsg.textContent = "折扣碼不正確，再確認一下唷 🥲";
+        codeMsg.className = "text-xs mt-2 text-rose-500 font-bold";
+      }
+    }
+    unlockBtn.addEventListener('click', tryUnlock);
+    codeInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+    renderFilters();
+    render();
+  </script>
+</body>
+</html>
