@@ -170,6 +170,24 @@
     </div>
   </footer>
 
+  <!-- 商品詳情 Modal -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" role="dialog" aria-modal="true">
+    <div class="bg-white rounded-3xl max-w-md w-full max-h-[92vh] overflow-y-auto relative">
+      <button id="mClose" aria-label="關閉" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/90 shadow flex items-center justify-center text-lg hover:bg-stone-100">✕</button>
+      <img id="mImg" alt="" class="w-full aspect-square object-cover rounded-t-3xl" />
+      <div class="p-5">
+        <span id="mCat" class="text-xs text-stone-400"></span>
+        <h3 id="mName" class="font-black text-lg leading-snug mb-2"></h3>
+        <div id="mPrice" class="flex items-end gap-2 flex-wrap mb-3"></div>
+        <p id="mDesc" class="text-sm text-stone-600 leading-relaxed whitespace-pre-line mb-4"></p>
+        <label for="mQty" class="text-sm font-bold block mb-1">數量</label>
+        <select id="mQty" class="w-full border border-stone-300 rounded-xl px-3 py-2 mb-3 focus:outline-none focus:border-rose-500 bg-white"></select>
+        <a id="mLine" href="#" target="_blank" class="block text-center text-base font-bold bg-[#06C755] text-white py-3 rounded-xl hover:opacity-90 transition"></a>
+        <p id="mHint" class="text-[11px] text-stone-400 mt-2 text-center"></p>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* =========================================================
        商品資料 — 之後只要改這個 array 就能換圖 / 改價 / 加商品
@@ -179,24 +197,36 @@
     const LINE_ADD = "https://lin.ee/9M4i0Vj"; // 香菇綸爸 官方帳號（專屬ID @mushroom131 / 基本ID @507tuqaf）
     const PRODUCTS = [
       // 主食
-      { cat: "主食",     name: "毛孩高端餐 專利凍乾益菌糧 1.15Kg／包（貓寶／狗寶營養餐）", price: 1100, original: 1680, badge: "熱銷",   img: "images/P01.jpg" },
+      { cat: "主食", unit: "包", name: "毛孩高端餐 專利凍乾益菌糧 1.15Kg／包（貓寶／狗寶營養餐）", price: 1100, original: 1680, badge: "熱銷", img: "images/P01.jpg",
+        desc: "依 AAFCO／NRC 營養標準，全齡貓犬適用、可長期作為主食。\n有肉、有飯、有蔬果，專利凍乾技術外層酥脆、內裡鬆軟，肉鬆包裹好誘食。\n添加魚油、卵磷脂、牛磺酸、木瓜酵素與專利三益菌，均衡好入口。" },
       // 營養保養
-      { cat: "營養保養", name: "金牌鏟屎官 藍藻益生菌膠囊（30粒／瓶）", price: 1180, original: 1680, badge: "", img: "images/P02.jpg" },
-      { cat: "營養保養", name: "寵物皮麗舒噴霧 100ml", price: 1250, original: 1800, badge: "", img: "images/P03.jpg" },
+      { cat: "營養保養", unit: "瓶", name: "金牌鏟屎官 藍藻益生菌膠囊（30粒／瓶）", price: 1180, original: 1680, badge: "", img: "images/P02.jpg",
+        desc: "毛孩日常的營養補給小習慣，拌餐即食、挑嘴貓接受度高。\n每瓶 30 粒，適合每天為毛孩做日常保養。" },
+      { cat: "營養保養", unit: "瓶", name: "寵物皮麗舒噴霧 100ml", price: 1250, original: 1800, badge: "", img: "images/P03.jpg",
+        desc: "微量元素專家配方，主打日常皮膚清潔與溫和舒緩護理。\n適合毛孩居家日常使用，溫和好上手。" },
       // 寵物用品
-      { cat: "寵物用品", name: "呆丸喵 胜肽豆腐貓砂 2.5kg（6包／箱）", price: 1320, original: 1980, badge: "台灣製", img: "images/P04.jpg", note: "100%台灣製造・食品級豆渣・獨家胜肽益菌配方" },
+      { cat: "寵物用品", unit: "箱", name: "呆丸喵 胜肽豆腐貓砂 2.5kg（6包／箱）", price: 1320, original: 1980, badge: "台灣製", img: "images/P04.jpg", note: "100%台灣製造・食品級豆渣・獨家胜肽益菌配方",
+        desc: "100% 台灣在地製造，嚴選桃園大溪食品級豆渣。\n獨家胜肽益菌配方，除臭、抗菌、低粉塵，可沖馬桶更方便。\n一箱 6 包（每包 2.4kg 級）。" },
       // 生活用品
-      { cat: "生活用品", name: "病毒盾 VirusOUT 菌切錠（12錠／盒）", price: 1980, original: 3600, badge: "", img: "images/P05.jpg", note: "錠狀好攜帶分裝・人／寵／環境三友善" },
-      { cat: "生活用品", name: "五月花 210抽（48包／箱）", price: 1080, original: 2180, badge: "整箱超值", img: "images/P06.jpg", note: "原生紙漿・FSC 森林驗證・可分散丟馬桶" },
+      { cat: "生活用品", unit: "盒", name: "病毒盾 VirusOUT 菌切錠（12錠／盒）", price: 1980, original: 3600, badge: "", img: "images/P05.jpg", note: "錠狀好攜帶分裝・人／寵／環境三友善",
+        desc: "錠狀包裝好攜帶、分裝方便，居家清潔、衣物消毒、環境防護都適用。\n三大友善：對動物友善、對環境安全無毒、對人類友善，寶貝玩具寢具都能用。\n每盒 12 錠。" },
+      { cat: "生活用品", unit: "箱", name: "五月花 210抽（48包／箱）", price: 1080, original: 2180, badge: "整箱超值", img: "images/P06.jpg", note: "原生紙漿・FSC 森林驗證・可分散丟馬桶",
+        desc: "結合面紙與衛生紙優點，柔韌細緻好擦拭、擦臉不留屑。\n100% 原生紙漿、不含螢光劑，可分散配方丟馬桶也不阻塞。\n取得 FSC 森林驗證，一箱 48 包。" },
       // 美容保養
-      { cat: "美容保養", name: "LOVEISDERMA 愛斯德瑪 友善海洋防曬乳", price: 590, original: 850, badge: "", img: "images/P07.jpg", note: "2 條 $1080（平均540）／4 條 $2060" },
+      { cat: "美容保養", unit: "條", name: "LOVEISDERMA 愛斯德瑪 友善海洋防曬乳", price: 590, original: 850, badge: "", img: "images/P07.jpg", note: "2 條 $1080（平均540）／4 條 $2060",
+        desc: "友善海洋防曬配方 SPF50+，兼具化學性與物理性防護，阻隔 UVA／UVB。\n極清爽水感乳液，含 Ectoin® 與龍膽萃取（ECOCERT 有機認證），日常好推勻。" },
       // 舒壓保養
-      { cat: "舒壓保養", name: "朵妮朵絲 玫瑰／茉莉精露（臉部保養）", price: 650, original: 680, badge: "", img: "images/P08.jpg", note: "玫瑰／茉莉可選・2 瓶 $1200／3 瓶 $1750" },
-      { cat: "舒壓保養", name: "V臉精華油組（1094 精華油＋溫潤經絡梳）", price: 2380, original: 2770, badge: "", img: "images/P09.jpg", note: "1 瓶精華油＋經絡梳・2 組 $4560" },
-      { cat: "舒壓保養", name: "美體全能油刷刷組（全能油2瓶＋經絡刷）", price: 1900, original: 2640, badge: "", img: "images/P10.jpg", note: "1 組 2 瓶＋經絡刷・2 組 $4560" },
+      { cat: "舒壓保養", unit: "瓶", name: "朵妮朵絲 玫瑰／茉莉精露（臉部保養）", price: 650, original: 680, badge: "", img: "images/P08.jpg", note: "玫瑰／茉莉可選・2 瓶 $1200／3 瓶 $1750",
+        desc: "嚴選大馬士革玫瑰／茉莉花，只取第一道初榨原液，成分純淨。\n清新舒緩、保濕調理肌膚，淡雅香氣讓日常臉部保養更享受。\n玫瑰／茉莉可任選。" },
+      { cat: "舒壓保養", unit: "組", name: "V臉精華油組（1094 精華油＋溫潤經絡梳）", price: 2380, original: 2770, badge: "", img: "images/P09.jpg", note: "1 瓶精華油＋經絡梳・2 組 $4560",
+        desc: "以油養膚新境界：1094 精華油 1 瓶＋溫潤經絡梳 1 個。\n結合蓮花與玫瑰香氣，搭配經絡梳點對點按摩，居家芳療好放鬆。" },
+      { cat: "舒壓保養", unit: "組", name: "美體全能油刷刷組（全能油2瓶＋經絡刷）", price: 1900, original: 2640, badge: "", img: "images/P10.jpg", note: "1 組 2 瓶＋經絡刷・2 組 $4560",
+        desc: "極效美體全能油 2 瓶＋經絡刷 1 個。\n植萃溫和滋養、柔潤保濕，每天用最自然的植物呵護身體，居家按摩放鬆身心。" },
       // 美食
-      { cat: "美食",     name: "好食光 海苔脆魚捲（1盒）", price: 300, original: 400, badge: "", img: "images/P11.jpg", note: "2 盒 $500／4 盒 $930／16 盒 $3360／24 盒 $4800" },
-      { cat: "美食",     name: "酷覓星 香鬆起士糙米捲（奇亞籽＋彩虹藜麥）", price: 248, original: 300, badge: "iTQi 二星", img: "images/P12.jpg", note: "2 包 $496／4 包 $922／10 包 $2110／24 包 $4912" },
+      { cat: "美食", unit: "盒", name: "好食光 海苔脆魚捲（1盒）", price: 300, original: 400, badge: "", img: "images/P11.jpg", note: "2 盒 $500／4 盒 $930／16 盒 $3360／24 盒 $4800",
+        desc: "虱目魚經高溫工序製成超薄 0.01 公分脆片，酥脆爽口、海陸雙享。\n100% 不含防腐劑，輕食美味越吃越涮嘴。每盒 10 根／80g。" },
+      { cat: "美食", unit: "盒", name: "酷覓星 香鬆起士糙米捲（奇亞籽＋彩虹藜麥）", price: 248, original: 300, badge: "iTQi 二星", img: "images/P12.jpg", note: "2 包 $496／4 包 $922／10 包 $2110／24 包 $4912",
+        desc: "糙米膨發米捲注入蛋黃內餡，外層濃郁起士＋海苔芝麻香鬆，加入奇亞籽、藜麥。\n非油炸更安心、無防腐劑，榮獲比利時 iTQi 風味評鑑二星。每盒 10 根／80g。" },
     ];
 
     const grid = document.getElementById('grid');
@@ -212,10 +242,11 @@
 
     function render() {
       grid.innerHTML = PRODUCTS
-        .filter(p => active === "全部商品" || p.cat === active)
-        .map(p => `
-          <a href="${lineLink(p.name)}" target="_blank"
-             class="group bg-white rounded-2xl overflow-hidden border border-stone-200/60 card-shadow hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col">
+        .map((p, i) => ({ p, i }))
+        .filter(({ p }) => active === "全部商品" || p.cat === active)
+        .map(({ p, i }) => `
+          <div data-idx="${i}" role="button" tabindex="0"
+             class="product-card group cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200/60 card-shadow hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col">
             <div class="relative">
               <img src="${p.img}" alt="${p.name}" class="w-full aspect-square object-cover" />
               ${p.badge ? `<span class="absolute top-2 left-2 bg-rose-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">${p.badge}</span>` : ""}
@@ -231,9 +262,9 @@
                      <span class="text-rose-500 text-xs font-bold">🔒 折扣碼再優惠</span>`}
               </div>
               ${p.note ? `<p class="text-[11px] text-stone-400 mt-1 leading-snug">${p.note}</p>` : ""}
-              <span class="mt-3 text-center text-sm font-bold bg-[#06C755] text-white py-2 rounded-xl group-hover:opacity-90">LINE 詢問 / 下單 🚀</span>
+              <span class="mt-3 text-center text-sm font-bold bg-[#06C755] text-white py-2 rounded-xl group-hover:opacity-90">看介紹 / 選購 🛒</span>
             </div>
-          </a>
+          </div>
         `).join('');
     }
 
@@ -267,6 +298,78 @@
     }
     unlockBtn.addEventListener('click', tryUnlock);
     codeInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+
+    // 商品詳情 Modal
+    const modal = document.getElementById('modal');
+    const mImg = document.getElementById('mImg');
+    const mCat = document.getElementById('mCat');
+    const mName = document.getElementById('mName');
+    const mPrice = document.getElementById('mPrice');
+    const mDesc = document.getElementById('mDesc');
+    const mQty = document.getElementById('mQty');
+    const mLine = document.getElementById('mLine');
+    const mHint = document.getElementById('mHint');
+    let curP = null;
+
+    function priceHTML(p) {
+      return unlocked
+        ? `<span class="text-rose-600 font-black text-2xl">$${p.price}</span><span class="text-stone-400 line-through text-sm">市售 $${p.original}</span>`
+        : `<span class="text-stone-800 font-black text-2xl">市售 $${p.original}</span><span class="text-rose-500 text-sm font-bold">🔒 輸入折扣碼再優惠</span>`;
+    }
+    function buildQty(p) {
+      const u = p.unit || '件';
+      let opts = '';
+      for (let n = 1; n <= 3; n++) opts += `<option value="${n}">${n} ${u}</option>`;
+      opts += `<option value="4+">超過 3 ${u}（大量優惠・LINE 詢問）</option>`;
+      mQty.innerHTML = opts;
+    }
+    function updateLine() {
+      if (!curP) return;
+      const q = mQty.value, u = curP.unit || '件';
+      let msg;
+      if (q === '4+') {
+        msg = `我想大量訂購：${curP.name}（超過 3 ${u}），想問大量優惠與運費 🙌`;
+        mLine.textContent = '大量訂購・LINE 詢問 🚀';
+        mHint.textContent = '數量較多，香菇爸會幫你算大量優惠與免運';
+      } else {
+        msg = `我想購買：${curP.name} ×${q} ${u}（折扣碼 119208）`;
+        mLine.textContent = `LINE 下單（${q} ${u}）🚀`;
+        mHint.textContent = '點按鈕會帶你到 LINE，訊息已幫你打好，直接送出即可';
+      }
+      mLine.href = `https://line.me/R/oaMessage/@mushroom131/?${encodeURIComponent(msg)}`;
+    }
+    function openModal(i) {
+      curP = PRODUCTS[i];
+      mImg.src = curP.img; mImg.alt = curP.name;
+      mCat.textContent = curP.cat;
+      mName.textContent = curP.name;
+      mPrice.innerHTML = priceHTML(curP);
+      mDesc.textContent = curP.desc || '';
+      buildQty(curP);
+      updateLine();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+    mQty.addEventListener('change', updateLine);
+    document.getElementById('mClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    grid.addEventListener('click', e => {
+      const card = e.target.closest('.product-card');
+      if (card) openModal(+card.dataset.idx);
+    });
+    grid.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.product-card');
+        if (card) { e.preventDefault(); openModal(+card.dataset.idx); }
+      }
+    });
 
     renderFilters();
     render();
