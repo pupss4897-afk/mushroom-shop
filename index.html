@@ -205,11 +205,34 @@
        ========================================================= */
     const LINE_ADD = "https://lin.ee/9M4i0Vj"; // 香菇綸爸 官方帳號（專屬ID @mushroom131 / 基本ID @507tuqaf）
     const PRODUCTS = [
+      // 本月開團（保健營養）⚠️ desc 只寫成分／規格／吃法等事實，不寫功效
+      { cat: "本月開團", unit: "盒", name: "Simply 新普利 夜酵素薑黃錠 PLUS+（30錠／盒）", price: 1700, original: 2100, badge: "本月開團", img: "images/n/night.jpg", note: "專利薑黃・蔬果酵素・睡前 2 錠",
+        desc: "主要成分：專利薑黃萃取、80 種以上綜合蔬果酵素、GABA、L-色胺酸、綜合必需胺基酸、益生菌。\n規格：0.75g × 30 錠／盒｜台灣製造｜奶素\n食用方式：每日睡前 2 錠，配合開水食用。\n孕婦、哺乳婦、服用藥物或有疾病者，請先諮詢醫師或藥師。" },
+      { cat: "本月開團", unit: "盒", name: "Double Berry 漫悅莓素食膠囊（60粒／盒）", price: 3280, original: 4800, badge: "本月開團", img: "images/n/berry.jpg", note: "蔓越莓・洛神花萼・專利益生菌・全素",
+        desc: "主要成分：CystiCran®40 與 CranPure® 雙重蔓越莓萃取、洛神花萼萃取、SynForU™-HerCare 益生菌、透納葉萃取。\n規格：500mg × 60 粒／盒｜台灣製造｜全素可食\n食用方式：每日 1～2 次，每次 1 粒，配冷溫開水，飯前飯後皆可。" },
+      { cat: "本月開團", unit: "盒", name: "Beauty Style 水嫩模式 白皙加橙發泡錠（20錠／盒）", price: 980, original: 1380, badge: "本月開團", img: "images/n/vitc.jpg", note: "義大利血橙 ROC・維生素C 1000mg・全植物來源",
+        desc: "主要成分：RED ORANGE COMPLEX® 義大利西西里血橙萃取、維生素 C 1000mg、菸鹼素 18mg、鋅 10mg、葡萄皮萃取。\n規格：20 錠／盒｜台灣製造｜成分皆為植物來源\n食用方式：每日 1 錠，以 150ml 冷（溫）水沖泡溶解後飲用，請勿直接吞食。" },
+      { cat: "本月開團", unit: "瓶", name: "NutriHsieh 速疾通膠囊 PLUS（60顆／瓶）", price: 4060, original: 5980, badge: "本月開團", img: "images/n/fastsoon.jpg", note: "日本蚓激酶・西班牙橙皮萃取・8 種植萃",
+        desc: "主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取，搭配川芎、當歸、白芍、熟地、刺五加、黑棗、黑芝麻、黑胡椒萃取，以及維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n營養學博士 謝明哲 教授 研發監督。懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。" },
+      { cat: "本月開團", unit: "瓶", name: "Double Power 原粹藍藻錠（300顆／瓶）", price: 2250, original: 3300, badge: "本月開團", img: "images/n/spirulina.jpg", note: "美國加州螺旋藻・藻青苷 18%・全家適用",
+        desc: "原料來自美國加州 Sonoran 沙漠的 Spirulina Nature 螺旋藻養殖場，藻青苷達 18%。\n含蛋白質、鈣質、β-胡蘿蔔素、鐵質等營養素。\n非基因改造・不含除草劑與殺蟲劑・不添加防腐劑・無藻毒素。\n規格：510mg × 300 錠／瓶｜原料美國加州｜素食\n食用方式：每日 5 錠，餐前或餐後配開水食用。" },
+      { cat: "本月開團", unit: "盒", name: "Double Power 纖歲茶（30包／盒・奶茶／抹茶）", price: 3480, original: 5600, badge: "本月開團", img: "images/n/tea.jpg", note: "沙拉用喝的・奶茶／抹茶兩種口味",
+        desc: "膳食纖維＋多種綜合蔬果酵素＋海洋萃取元素，加水就能喝的蔬果飲。\n經檢驗不含重金屬、農藥、大腸桿菌、沙門氏桿菌、番瀉苷 A／B。\n規格：10g × 30 包／盒｜台灣製造｜奶茶／抹茶口味可選\n食用方式：每日 1 包，加入 200～250cc 溫開水攪拌均勻即可飲用。" },
+      { cat: "本月開團", unit: "盒", name: "幸福鱸魚飲 粉橘版（10瓶／盒）", price: 1860, original: 2500, badge: "本月開團", img: "images/n/bass.jpg", note: "無腥味好喝・每日 1 瓶・冰涼更好喝",
+        desc: "主要成分：濃縮乳清蛋白、魚膠原蛋白、鱸魚萃取粉、乳鐵蛋白、維生素 B 群、維生素 C、維生素 D3。\n規格：50ml × 10 瓶／盒｜台灣製造｜含奶類、魚類\n食用方式：每日 1 瓶，冰涼後飲用風味更佳。" },
+      { cat: "本月開團", unit: "罐", name: "Pures Select 南極冰鑽頂級磷蝦油 家庭號（200粒／罐）", price: 9780, original: 13900, badge: "本月開團", img: "images/n/krill.jpg", note: "挪威 Superba2 磷蝦油・DHA・蝦紅素・PS",
+        desc: "主要成分：挪威 Superba2™ 南極磷蝦油、紅藻萃取（蝦紅素）、大豆萃取 PS 磷脂絲胺酸、life's DHA™ 藻油、深層海洋濃縮萃取、第四代葉酸、Lipofer® 微膠囊鐵、珍珠粉、維生素 E。\n規格：200 粒／罐｜主原料產地南極・台灣包裝｜葷食\n食用方式：每日早晚各 1 粒，配溫水空腹服用，睡前最佳。\n對甲殼類及大豆過敏者請勿食用。" },
+      { cat: "本月開團", unit: "箱", name: "Meta Water 未來萃能水 貴珀香檳風味（24瓶／箱）", price: 3672, original: 6720, badge: "本月開團", img: "images/n/metawater.jpg", note: "零糖・無酒精・低咖啡因",
+        desc: "香檳風味氣泡飲，零糖、無酒精、低咖啡因（29.7mg／100ml）。\n主要成分：異麥芽寡醣、牛磺酸、蘋果醋、紅葡萄果汁、人參葉萃取、神仙菜萃取、維生素 B2／B6／B12。\n規格：235ml × 24 瓶／箱｜台灣製造\n食用方式：每日 1 瓶，冷飲風味更佳。孩童、孕婦及哺乳婦女不宜飲用。" },
+      { cat: "本月開團", unit: "桶", name: "BoomCa+ 彈力支點 每日鈣補給軟糖（60顆桶裝・葡萄口味）", price: 1590, original: 2480, badge: "本月開團", img: "images/n/boomca.jpg", note: "每顆 125mg 鈣＋D3・K2・CPP・6 歲以上",
+        desc: "把日常補鈣做成好咀嚼的葡萄口味軟糖，每顆含 125mg 鈣，搭配維生素 D3、K2、CPP 與維生素 C。\n適合 6 歲以上孩子、大人、外食族與不愛吞錠劑的人。\n規格：3.7g × 60 顆／桶｜台灣製造｜葷食\n食用方式：孩童每日 2 顆、成人每日 4 顆，請咀嚼食用，勿直接吞食。" },
+      { cat: "本月開團", unit: "盒", name: "Double Power 8 ComBIO 全專利雙效益生菌（60包／盒）", price: 2320, original: 4500, badge: "本月開團", img: "images/n/combio.jpg", note: "8 株專利菌種・每包 233 億・SNQ 國家品質標章",
+        desc: "以 8 株全專利菌種為核心，搭配 7 種綜合酵素與益生質，每包 233 億菌數。\n可幫助維持消化道機能，連續 10 年獲 SNQ 國家品質標章。\n規格：1.5g × 60 包／盒｜台灣製造\n食用方式：每日 1～2 包，直接食用或搭配冷開水、果汁。" },
       // 主食
       { cat: "主食", unit: "包", name: "毛孩高端餐 專利凍乾益菌糧 1.15Kg／包（貓寶／狗寶營養餐）", price: 1100, original: 1680, badge: "熱銷", img: "images/P01.jpg",
         desc: "依 AAFCO／NRC 營養標準，全齡貓犬適用、可長期作為主食。\n有肉、有飯、有蔬果，專利凍乾技術外層酥脆、內裡鬆軟，肉鬆包裹好誘食。\n添加魚油、卵磷脂、牛磺酸、木瓜酵素與專利三益菌，均衡好入口。" },
       // 營養保養
-      { cat: "營養保養", unit: "瓶", name: "金牌鏟屎官 藍藻益生菌膠囊（30粒／瓶）", price: 1180, original: 1680, badge: "", img: "images/P02.jpg",
+      { cat: "營養保養", unit: "瓶", name: "金牌鏟屎官 藍藻益生菌膠囊（30粒／瓶）", price: 1180, original: 1680, badge: "", img: "images/n/pet-spirulina.jpg",
         desc: "毛孩日常的營養補給小習慣，拌餐即食、挑嘴貓接受度高。\n每瓶 30 粒，適合每天為毛孩做日常保養。" },
       { cat: "營養保養", unit: "瓶", name: "寵物皮麗舒噴霧 100ml", price: 1250, original: 1800, badge: "", img: "images/P03.jpg",
         desc: "微量元素專家配方，主打日常皮膚清潔與溫和舒緩護理。\n適合毛孩居家日常使用，溫和好上手。" },
@@ -235,20 +258,20 @@
         desc: "糙米膨發米捲注入蛋黃內餡，外層濃郁起士＋海苔芝麻香鬆，加入奇亞籽、藜麥。\n非油炸更安心、無防腐劑，榮獲比利時 iTQi 風味評鑑二星。每盒 10 根／80g。" },
     ];
 
-    /* 情境推薦：top 放 PRODUCTS 的順序號碼（從 0 開始），依序是 TOP1、TOP2、TOP3
+    /* 情境推薦：top 放商品名稱裡的關鍵字，依序是 TOP1、TOP2、TOP3
        ⚠️ 合規：情境名稱不可暗示療效（好睡／窈窕／發育／免疫提升 都不能用） */
     // 情境圖示：GPT 靜物圖切出來的 images/scene/scene-<ic>.jpg（背景 #FCFAF5）
     const SCENES = [
-      { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", top: [] },
-      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: [8, 7, 6] },
-      { ic: "laptop", bg: "#E3EDF3", fg: "#3F6E86", name: "3C 族每日保養", top: [] },
-      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", top: [6, 5, 7] },
-      { ic: "leaf",   bg: "#E4EFE3", fg: "#4F7F4C", name: "輕盈生活提案", top: [] },
-      { ic: "bowl",   bg: "#F5E8DC", fg: "#9A6339", name: "外食族營養補給", top: [] },
-      { ic: "chair",  bg: "#EEE7DF", fg: "#7A6250", name: "銀髮族日常補給", top: [] },
-      { ic: "sprout", bg: "#E6F1E8", fg: "#3E8462", name: "成長期營養補給", top: [] },
-      { ic: "baby",   bg: "#FCEBDD", fg: "#C0703A", name: "小朋友日常保養", top: [] },
-      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", top: [0, 1] },
+      { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", top: ["Meta Water", "原粹藍藻錠", "磷蝦油"] },
+      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: ["夜酵素", "美體全能油", "V臉精華油"] },
+      { ic: "laptop", bg: "#E3EDF3", fg: "#3F6E86", name: "3C 族每日保養", top: ["磷蝦油", "Meta Water", "雙效益生菌"] },
+      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", top: ["水嫩模式", "漫悅莓", "精露"] },
+      { ic: "leaf",   bg: "#E4EFE3", fg: "#4F7F4C", name: "輕盈生活提案", top: ["纖歲茶", "夜酵素", "雙效益生菌"] },
+      { ic: "bowl",   bg: "#F5E8DC", fg: "#9A6339", name: "外食族營養補給", top: ["速疾通", "雙效益生菌", "纖歲茶"] },
+      { ic: "chair",  bg: "#EEE7DF", fg: "#7A6250", name: "銀髮族日常補給", top: ["磷蝦油", "幸福鱸魚", "速疾通"] },
+      { ic: "sprout", bg: "#E6F1E8", fg: "#3E8462", name: "成長期營養補給", top: ["BoomCa", "幸福鱸魚", "原粹藍藻錠"] },
+      { ic: "baby",   bg: "#FCEBDD", fg: "#C0703A", name: "小朋友日常保養", top: ["BoomCa", "雙效益生菌", "原粹藍藻錠"] },
+      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", top: ["高端餐", "藍藻益生菌膠囊"] },
     ];
     let scene = 0;
     const sceneBar = document.getElementById('sceneBar');
@@ -266,9 +289,10 @@
       sceneBar.querySelectorAll('button').forEach(b =>
         b.addEventListener('click', () => { scene = +b.dataset.s; renderScenes(); }));
       const s = SCENES[scene];
-      scenePanel.innerHTML = s.top.length ? `
+      const tops = s.top.map(k => PRODUCTS.findIndex(p => p.name.includes(k))).filter(i => i >= 0);
+      scenePanel.innerHTML = tops.length ? `
         <div class="grid grid-cols-3 gap-2 sm:gap-4">
-          ${s.top.slice(0, 3).map((idx, r) => { const p = PRODUCTS[idx]; return `
+          ${tops.slice(0, 3).map((idx, r) => { const p = PRODUCTS[idx]; return `
             <div data-idx="${idx}" role="button" tabindex="0" class="product-card cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200 card-shadow hover:-translate-y-1 transition">
               <div class="relative"><img src="${p.img}" alt="${p.name}" class="w-full aspect-square object-cover" />
                 <span class="absolute top-1.5 left-1.5 bg-white/95 text-[11px] font-black px-2 py-0.5 rounded-full shadow">${MEDAL[r]}</span></div>
