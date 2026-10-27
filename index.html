@@ -240,20 +240,7 @@
 
     /* 情境推薦：top 放 PRODUCTS 的順序號碼（從 0 開始），依序是 TOP1、TOP2、TOP3
        ⚠️ 合規：情境名稱不可暗示療效（好睡／窈窕／發育／免疫提升 都不能用） */
-    // 細線條圖示（同一套風格）
-    const ICON = {
-      sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
-      moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/><path d="M19 3v4M21 5h-4"/>',
-      laptop: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>',
-      flower: '<circle cx="12" cy="12" r="3"/><path d="M12 16.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 1 1 4.5 4.5 4.5 4.5 0 1 1-4.5 4.5"/><path d="M12 7.5V9M7.5 12H9M16.5 12H15M12 16.5V15"/>',
-      leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
-      bowl: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
-      chair: '<path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M5 18v2M19 18v2"/>',
-      sprout: '<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
-      baby: '<path d="M9 12h.01M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/>',
-      paw: '<circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/>',
-    };
-    const svg = (k, c) => `<svg viewBox="0 0 24 24" class="${c}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
+    // 情境圖示：GPT 靜物圖切出來的 images/scene/scene-<ic>.jpg（背景 #FCFAF5）
     const SCENES = [
       { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", top: [] },
       { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: [9, 8, 7] },
@@ -272,10 +259,12 @@
     const MEDAL = ["🥇 TOP 1", "🥈 TOP 2", "🥉 TOP 3"];
     function renderScenes() {
       sceneBar.innerHTML = SCENES.map((s, i) => `
-        <button data-s="${i}" class="snap-start shrink-0 w-[96px] rounded-2xl border px-1.5 pt-3 pb-2.5 text-center transition
-          ${i === scene ? 'border-stone-800 bg-white shadow-md' : 'border-stone-200 bg-white/70 hover:bg-white'}">
-          <span class="mx-auto w-11 h-11 rounded-full grid place-items-center" style="background:${s.bg};color:${s.fg}">${svg(s.ic, 'w-6 h-6')}</span>
-          <span class="block text-[11.5px] font-bold leading-tight mt-2 whitespace-nowrap ${i === scene ? 'text-stone-900' : 'text-stone-600'}">${s.name}</span>
+        <button data-s="${i}" class="snap-start shrink-0 w-[100px] text-center group">
+          <span class="block rounded-2xl overflow-hidden bg-[#FCFAF5] border transition ${i === scene ? 'border-stone-800 shadow-md' : 'border-stone-200 group-hover:border-stone-400'}">
+            <img src="images/scene/scene-${s.ic}.jpg" alt="" class="w-full aspect-square object-cover transition duration-300 ${i === scene ? 'scale-105' : 'group-hover:scale-105'}" loading="lazy" />
+          </span>
+          <span class="block text-[11.5px] leading-tight mt-2 whitespace-nowrap tracking-wide ${i === scene ? 'text-stone-900 font-bold' : 'text-stone-500'}">${s.name}</span>
+          <span class="block mx-auto mt-1 h-[2px] w-5 rounded-full ${i === scene ? 'bg-stone-800' : 'bg-transparent'}"></span>
         </button>`).join('');
       sceneBar.querySelectorAll('button').forEach(b =>
         b.addEventListener('click', () => { scene = +b.dataset.s; renderScenes(); }));
@@ -292,8 +281,8 @@
               </div>
             </div>`; }).join('')}
         </div>` : `
-        <div class="rounded-2xl border border-dashed border-stone-300 bg-white px-4 py-6 text-center">
-          <span class="mx-auto mb-2 w-14 h-14 rounded-full grid place-items-center" style="background:${s.bg};color:${s.fg}">${svg(s.ic, 'w-7 h-7')}</span>
+        <div class="rounded-2xl border border-stone-200 bg-[#FCFAF5] px-4 py-6 text-center">
+          <img src="images/scene/scene-${s.ic}.jpg" alt="" class="mx-auto mb-2 w-20 h-20 rounded-2xl object-cover" />
           <p class="font-black">${s.name}</p>
           <p class="text-sm text-stone-500 mt-1">本月開團新品整理中 即將上架</p>
           <a href="${LINE_ADD}" target="_blank" class="inline-block mt-3 text-sm font-bold bg-[#06C755] text-white px-4 py-2 rounded-full">想先了解 LINE 問香菇爸</a>
