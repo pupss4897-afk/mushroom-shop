@@ -90,7 +90,7 @@
     <p class="text-[11px] font-bold tracking-[.25em] text-rose-400 mb-1">FOR YOUR DAILY LIFE</p>
     <h2 class="text-xl sm:text-2xl font-black mb-1">情境推薦</h2>
     <p class="text-sm text-stone-500 mb-3">選一個你現在的生活情境，看香菇爸的 TOP 1・2・3</p>
-    <div id="sceneBar" class="flex gap-2 overflow-x-auto pb-2 snap-x"></div>
+    <div id="sceneBar" class="grid grid-rows-2 grid-flow-col auto-cols-[168px] gap-2 overflow-x-auto pb-2 snap-x sm:grid-flow-row sm:grid-rows-none sm:grid-cols-5 sm:auto-cols-auto sm:overflow-visible"></div>
     <div id="scenePanel" class="mt-3"></div>
   </section>
 
@@ -257,19 +257,21 @@
     const MEDAL = ["🥇 TOP 1", "🥈 TOP 2", "🥉 TOP 3"];
     function renderScenes() {
       sceneBar.innerHTML = SCENES.map((s, i) => `
-        <button data-s="${i}" class="snap-start shrink-0 w-[100px] text-center group">
-          <span class="block rounded-2xl overflow-hidden bg-[#FCFAF5] border transition ${i === scene ? 'border-stone-800 shadow-md' : 'border-stone-200 group-hover:border-stone-400'}">
-            <img src="images/scene/scene-${s.ic}.jpg" alt="" class="w-full aspect-square object-cover transition duration-300 ${i === scene ? 'scale-105' : 'group-hover:scale-105'}" loading="lazy" />
+        <button data-s="${i}" class="snap-start flex items-center gap-2.5 rounded-2xl border p-1.5 pr-2 text-left transition
+          ${i === scene ? 'border-stone-800 bg-stone-800 text-white shadow-md' : 'border-stone-200 bg-white hover:border-stone-500 hover:shadow-sm'}">
+          <img src="images/scene/scene-${s.ic}.jpg" alt="" class="w-11 h-11 shrink-0 rounded-xl object-cover bg-[#FCFAF5]" loading="lazy" />
+          <span class="min-w-0 flex-1">
+            <span class="block text-[14px] font-bold leading-tight whitespace-nowrap">${s.name}</span>
+            <span class="block text-[11px] mt-0.5 ${i === scene ? 'text-stone-300' : 'text-stone-400'}">看 TOP 3</span>
           </span>
-          <span class="block text-[11.5px] leading-tight mt-2 whitespace-nowrap tracking-wide ${i === scene ? 'text-stone-900 font-bold' : 'text-stone-500'}">${s.name}</span>
-          <span class="block mx-auto mt-1 h-[2px] w-5 rounded-full ${i === scene ? 'bg-stone-800' : 'bg-transparent'}"></span>
+          <span class="text-lg leading-none ${i === scene ? 'text-white' : 'text-stone-300'}">›</span>
         </button>`).join('');
       sceneBar.querySelectorAll('button').forEach(b =>
         b.addEventListener('click', () => { scene = +b.dataset.s; renderScenes(); }));
       const s = SCENES[scene];
       const tops = s.top.map(k => PRODUCTS.findIndex(p => p.name.includes(k))).filter(i => i >= 0);
       scenePanel.innerHTML = tops.length ? `
-        <div class="grid grid-cols-3 gap-2 sm:gap-4">
+        <div class="grid grid-cols-3 gap-2 sm:gap-4 lg:max-w-4xl">
           ${tops.slice(0, 3).map((idx, r) => { const p = PRODUCTS[idx]; return `
             <div data-idx="${idx}" role="button" tabindex="0" class="product-card cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200 card-shadow hover:-translate-y-1 transition">
               <div class="relative"><img src="${p.img}" alt="${p.name}" class="w-full aspect-square object-cover" />
