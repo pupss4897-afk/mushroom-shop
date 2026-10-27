@@ -54,10 +54,12 @@
     </p>
   </section>
 
-  <!-- 首頁輪播 -->
+  <!-- 首頁活動影片（換活動時：換 media/ 裡的影片與封面圖） -->
   <section class="max-w-6xl mx-auto px-4 pb-5">
-    <div id="carousel" class="relative rounded-3xl overflow-hidden shadow-lg aspect-[16/10] sm:aspect-[16/7] bg-stone-100"></div>
-    <div id="dots" class="flex justify-center gap-2 mt-3"></div>
+    <div class="relative rounded-3xl overflow-hidden shadow-lg aspect-video bg-stone-100">
+      <video class="absolute inset-0 w-full h-full object-cover" src="media/hero-202611.mp4" poster="media/hero-202611.jpg"
+        autoplay muted loop playsinline preload="metadata" aria-label="感恩祭｜高端餐週年慶"></video>
+    </div>
   </section>
 
   <!-- 出貨 / 付款資訊 -->
@@ -69,30 +71,6 @@
     </div>
   </section>
 
-  <script>
-    (function () {
-      const imgs = ['images/hero/hero1.jpg', 'images/hero/hero2.jpg', 'images/hero/hero3.jpg', 'images/hero/hero4.jpg'];
-      const car = document.getElementById('carousel');
-      const dots = document.getElementById('dots');
-      car.innerHTML = imgs.map((s, i) =>
-        `<img src="${s}" alt="香菇日常 ${i + 1}" class="carousel-slide absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${i === 0 ? 'opacity-100' : 'opacity-0'}">`).join('');
-      dots.innerHTML = imgs.map((_, i) =>
-        `<button data-i="${i}" aria-label="第 ${i + 1} 張" class="w-2.5 h-2.5 rounded-full transition ${i === 0 ? 'bg-stone-700' : 'bg-stone-300'}"></button>`).join('');
-      const slides = [...car.querySelectorAll('.carousel-slide')];
-      const dotBtns = [...dots.querySelectorAll('button')];
-      let idx = 0, timer;
-      function go(n) {
-        slides[idx].classList.replace('opacity-100', 'opacity-0');
-        dotBtns[idx].classList.replace('bg-stone-700', 'bg-stone-300');
-        idx = (n + imgs.length) % imgs.length;
-        slides[idx].classList.replace('opacity-0', 'opacity-100');
-        dotBtns[idx].classList.replace('bg-stone-300', 'bg-stone-700');
-      }
-      function start() { timer = setInterval(() => go(idx + 1), 3500); }
-      dotBtns.forEach(b => b.addEventListener('click', () => { clearInterval(timer); go(+b.dataset.i); start(); }));
-      start();
-    })();
-  </script>
 
   <!-- 折扣碼解鎖優惠價 -->
   <div class="max-w-6xl mx-auto px-4 pb-6">
