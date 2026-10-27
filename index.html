@@ -247,16 +247,16 @@
        ⚠️ 合規：情境名稱不可暗示療效（好睡／窈窕／發育／免疫提升 都不能用） */
     // 情境圖示：GPT 靜物圖切出來的 images/scene/scene-<ic>.jpg（背景 #FCFAF5）
     const SCENES = [
-      { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", top: ["Meta Water", "原粹藍藻錠", "磷蝦油"] },
-      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: ["夜酵素", "美體全能油", "V臉精華油"] },
-      { ic: "laptop", bg: "#E3EDF3", fg: "#3F6E86", name: "3C 族每日保養", top: ["磷蝦油", "Meta Water", "雙效益生菌"] },
-      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", top: ["水嫩模式", "漫悅莓", "精露"] },
-      { ic: "leaf",   bg: "#E4EFE3", fg: "#4F7F4C", name: "輕盈生活提案", top: ["纖歲茶", "夜酵素", "雙效益生菌"] },
-      { ic: "bowl",   bg: "#F5E8DC", fg: "#9A6339", name: "外食族營養補給", top: ["速疾通", "雙效益生菌", "纖歲茶"] },
-      { ic: "chair",  bg: "#EEE7DF", fg: "#7A6250", name: "銀髮族日常補給", top: ["磷蝦油", "幸福鱸魚", "速疾通"] },
-      { ic: "sprout", bg: "#E6F1E8", fg: "#3E8462", name: "成長期營養補給", top: ["BoomCa", "幸福鱸魚", "原粹藍藻錠"] },
-      { ic: "baby",   bg: "#FCEBDD", fg: "#C0703A", name: "小朋友日常保養", top: ["BoomCa", "雙效益生菌", "原粹藍藻錠"] },
-      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", top: ["高端餐", "藍藻益生菌膠囊"] },
+      { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", q: "睡醒還是覺得沒精神？", line: "從每日營養補給開始，好好開啟新的一天！", top: ["Meta Water", "原粹藍藻錠", "磷蝦油"] },
+      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", q: "人躺在床上，腦袋卻還在加班？", line: "睡前留點時間給自己，慢慢放鬆下來。", top: ["夜酵素", "美體全能油", "V臉精華油"] },
+      { ic: "laptop", bg: "#E3EDF3", fg: "#3F6E86", name: "3C 族每日保養", q: "上班盯電腦，下班滑手機？", line: "你下班了，眼睛卻還在加班！", top: ["磷蝦油", "Meta Water", "雙效益生菌"] },
+      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", q: "保養品擦了一堆，還是覺得氣色不夠好？", line: "從日常飲食開始，好好寵愛自己。", top: ["水嫩模式", "漫悅莓", "精露"] },
+      { ic: "leaf",   bg: "#E4EFE3", fg: "#4F7F4C", name: "輕盈生活提案", q: "美食當前想吃，吃完又開始煩惱？", line: "享受生活的同時，也把每日補給照顧好。", top: ["纖歲茶", "夜酵素", "雙效益生菌"] },
+      { ic: "bowl",   bg: "#F5E8DC", fg: "#9A6339", name: "外食族營養補給", q: "三餐老是在外面解決，青菜好像永遠吃不夠？", line: "忙碌的日子，也別忘了營養補給！", top: ["速疾通", "雙效益生菌", "纖歲茶"] },
+      { ic: "chair",  bg: "#EEE7DF", fg: "#7A6250", name: "銀髮族日常補給", q: "爸媽總說吃得很好，餐桌上卻常常只有那幾樣？", line: "一起關心長輩的每日營養。", top: ["磷蝦油", "幸福鱸魚", "速疾通"] },
+      { ic: "sprout", bg: "#E6F1E8", fg: "#3E8462", name: "成長期營養補給", q: "孩子正在成長，卻擔心每天吃得不夠均衡？", line: "從三餐開始，陪孩子打好營養基礎。", top: ["BoomCa", "幸福鱸魚", "原粹藍藻錠"] },
+      { ic: "baby",   bg: "#FCEBDD", fg: "#C0703A", name: "小朋友日常保養", q: "孩子這個不吃、那個也挑，吃飯像在闖關？", line: "找到適合的方式，讓營養補給融入日常。", top: ["BoomCa", "雙效益生菌", "原粹藍藻錠"] },
+      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", q: "每天都餵得很認真，卻還是擔心寶貝吃得不夠好？", line: "香菇爸陪你一起挑，讓每一餐都更安心。", top: ["高端餐", "藍藻益生菌膠囊"] },
     ];
     let scene = 0;
     const sceneBar = document.getElementById('sceneBar');
@@ -277,7 +277,17 @@
         b.addEventListener('click', () => { scene = +b.dataset.s; renderScenes(); }));
       const s = SCENES[scene];
       const tops = s.top.map(k => PRODUCTS.findIndex(p => p.name.includes(k))).filter(i => i >= 0);
-      scenePanel.innerHTML = tops.length ? `
+      const head = `
+        <div class="flex items-center gap-3 rounded-2xl bg-white border border-stone-200 p-3 sm:p-4 mb-3">
+          <img src="images/scene/scene-${s.ic}.jpg" alt="" class="w-14 h-14 sm:w-16 sm:h-16 shrink-0 rounded-xl object-cover bg-[#FCFAF5]" />
+          <div class="min-w-0">
+            <p class="text-[11px] font-bold tracking-widest text-rose-400">${s.name}</p>
+            <p class="text-[15px] sm:text-lg font-black leading-snug mt-0.5">${s.q}</p>
+            <p class="text-[13px] sm:text-sm text-stone-500 mt-0.5">${s.line}</p>
+          </div>
+        </div>
+        <p class="text-[12px] text-stone-400 mb-2">香菇爸推薦這些 👇</p>`;
+      scenePanel.innerHTML = head + (tops.length ? `
         <div class="grid grid-cols-3 gap-2 sm:gap-4 lg:max-w-4xl">
           ${tops.slice(0, 3).map((idx, r) => { const p = PRODUCTS[idx]; return `
             <div data-idx="${idx}" role="button" tabindex="0" class="product-card cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200 card-shadow hover:-translate-y-1 transition">
@@ -294,7 +304,7 @@
           <p class="font-black">${s.name}</p>
           <p class="text-sm text-stone-500 mt-1">本月開團新品整理中 即將上架</p>
           <a href="${LINE_ADD}" target="_blank" class="inline-block mt-3 text-sm font-bold bg-[#06C755] text-white px-4 py-2 rounded-full">想先了解 LINE 問香菇爸</a>
-        </div>`;
+        </div>`);
     }
     scenePanel.addEventListener('click', e => {
       const card = e.target.closest('.product-card');
