@@ -191,7 +191,14 @@
       { cat: "本月開團", unit: "盒", name: "Beauty Style 水嫩模式 白皙加橙發泡錠（20錠／盒）", price: 980, original: 1380, badge: "本月開團", img: "images/n/vitc.jpg?v=2", note: "義大利血橙 ROC・維生素C 1000mg・全植物來源",
         desc: "主要成分：RED ORANGE COMPLEX® 義大利西西里血橙萃取、維生素 C 1000mg、菸鹼素 18mg、鋅 10mg、葡萄皮萃取。\n規格：20 錠／盒｜台灣製造｜成分皆為植物來源\n食用方式：每日 1 錠，以 150ml 冷（溫）水沖泡溶解後飲用，請勿直接吞食。" },
       { cat: "本月開團", unit: "瓶", name: "NutriHsieh 速疾通膠囊 PLUS（60顆／瓶）", price: 4060, original: 5980, badge: "本月開團", img: "images/n/fastsoon.jpg?v=2", note: "日本蚓激酶・西班牙橙皮萃取・8 種植萃",
-        desc: "主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取、川芎萃取、當歸萃取、白芍萃取、熟地萃取、刺五加萃取、黑棗萃取、黑芝麻萃取、黑胡椒萃取、維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n營養學博士 謝明哲 教授 研發監督。懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。" },
+        desc: "營養學博士 謝明哲 教授 研發監督。\n主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取、川芎萃取、當歸萃取、白芍萃取、熟地萃取、刺五加萃取、黑棗萃取、黑芝麻萃取、黑胡椒萃取、維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。",
+        qa: [
+          ["為什麼需要補充植萃精華？", "飲食精緻、外食頻率高，容易吃進過多油脂與調味，卻忽略了多元營養素。補充植萃與維生素、礦物質，讓日常飲食的營養更均衡。"],
+          ["速疾通膠囊有什麼特色？", "結合日本專利蚓激酶、西班牙專利橙皮萃取、日本血紅素，搭配多種植物萃取與維生素 B 群、維生素 C、葉酸。適合久坐上班族、外食族、銀髮族與想加強營養補給的人。"],
+          ["怎麼吃？", "日常每日 2 顆；調整期每日 4 顆（早、晚或午、晚各 2 顆），飯後配開水食用。規律補充更容易養成習慣。\n懷孕、哺乳、治療期間或有特殊體質者，建議帶著成分表詢問醫師或藥師。"],
+          ["正在吃其他保健品，可以一起吃嗎？", "建議和其他保健食品錯開時間食用，並留意是否重複補充相同營養素。有疑慮可以帶成分表詢問藥師或營養師。"],
+          ["要吃多久？", "速疾通是日常營養補給品，可依個人飲食與生活型態長期規律食用，搭配均衡飲食與適度運動。"]
+        ] },
       { cat: "本月開團", unit: "瓶", name: "Double Power 原粹藍藻錠（300顆／瓶）", price: 2250, original: 3300, badge: "本月開團", img: "images/n/spirulina.jpg?v=2", note: "美國加州螺旋藻・藻青苷 18%・全家適用",
         desc: "原料來自美國加州 Sonoran 沙漠的 Spirulina Nature 螺旋藻養殖場，藻青苷達 18%。\n含蛋白質、鈣質、β-胡蘿蔔素、鐵質等營養素。\n非基因改造・不含除草劑與殺蟲劑・不添加防腐劑・無藻毒素。\n規格：510mg × 300 錠／瓶｜原料美國加州｜素食\n食用方式：每日 5 錠，餐前或餐後配開水食用。" },
       { cat: "本月開團", unit: "盒", name: "Double Power 纖歲茶（30包／盒・奶茶／抹茶）", price: 3480, original: 5600, badge: "本月開團", img: "images/n/tea.jpg?v=2", note: "沙拉用喝的・奶茶／抹茶兩種口味",
@@ -431,13 +438,26 @@
       if (note.length) h += `<p class="text-[11.5px] text-stone-400 leading-relaxed mt-2">⚠️ ${note.map(esc).join('<br>')}</p>`;
       return h;
     }
+    function qaHTML(qa) {
+      if (!qa || !qa.length) return '';
+      return `<p class="text-[11px] font-bold tracking-widest text-stone-400 mt-4 mb-1.5">💬 常見問題</p>
+        <div class="rounded-2xl border border-stone-200 divide-y divide-stone-200 overflow-hidden">${qa.map(([q, a], i) => `
+          <details class="group">
+            <summary class="flex items-center gap-2 px-3.5 py-3 cursor-pointer list-none">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-stone-800 text-white text-[11px] font-bold grid place-items-center">Q${i + 1}</span>
+              <span class="flex-1 text-[13.5px] font-bold">${esc(q)}</span>
+              <span class="text-stone-400 transition group-open:rotate-90">›</span>
+            </summary>
+            <p class="px-3.5 pb-3 pl-[46px] text-[13px] text-stone-600 leading-relaxed whitespace-pre-line">${esc(a)}</p>
+          </details>`).join('')}</div>`;
+    }
     function openModal(i) {
       curP = PRODUCTS[i];
       mImg.src = curP.img; mImg.alt = curP.name;
       mCat.textContent = curP.cat;
       mName.textContent = curP.name;
       mPrice.innerHTML = priceHTML(curP);
-      mDesc.innerHTML = descHTML(curP.desc || '');
+      mDesc.innerHTML = descHTML(curP.desc || '') + qaHTML(curP.qa);
       buildQty(curP);
       updateLine();
       modal.classList.remove('hidden');
