@@ -213,9 +213,6 @@
         desc: "毛孩日常的營養補給小習慣，拌餐即食、挑嘴貓接受度高。\n每瓶 30 粒，適合每天為毛孩做日常保養。" },
       { cat: "營養保養", unit: "瓶", name: "寵物皮麗舒噴霧 100ml", price: 1250, original: 1800, badge: "", img: "images/P03.jpg",
         desc: "微量元素專家配方，主打日常皮膚清潔與溫和舒緩護理。\n適合毛孩居家日常使用，溫和好上手。" },
-      // 寵物用品
-      { cat: "寵物用品", unit: "箱", name: "呆丸喵 胜肽豆腐貓砂 2.5kg（6包／箱）", price: 1320, original: 1980, badge: "台灣製", img: "images/P04.jpg", note: "100%台灣製造・食品級豆渣・獨家胜肽益菌配方",
-        desc: "100% 台灣在地製造，嚴選桃園大溪食品級豆渣。\n獨家胜肽益菌配方，除臭、抗菌、低粉塵，可沖馬桶更方便。\n一箱 6 包（每包 2.4kg 級）。" },
       // 生活用品
       { cat: "生活用品", unit: "盒", name: "病毒盾 VirusOUT 菌切錠（12錠／盒）", price: 1980, original: 3600, badge: "", img: "images/P05.jpg", note: "錠狀好攜帶分裝・人／寵／環境三友善",
         desc: "錠狀包裝好攜帶、分裝方便，居家清潔、衣物消毒、環境防護都適用。\n三大友善：對動物友善、對環境安全無毒、對人類友善，寶貝玩具寢具都能用。\n每盒 12 錠。" },
@@ -243,15 +240,15 @@
     // 情境圖示：GPT 靜物圖切出來的 images/scene/scene-<ic>.jpg（背景 #FCFAF5）
     const SCENES = [
       { ic: "sun",    bg: "#FBEFD9", fg: "#B7791F", name: "早晨元氣補給", top: [] },
-      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: [9, 8, 7] },
+      { ic: "moon",   bg: "#E7E6F4", fg: "#5B5A99", name: "晚安放鬆時光", top: [8, 7, 6] },
       { ic: "laptop", bg: "#E3EDF3", fg: "#3F6E86", name: "3C 族每日保養", top: [] },
-      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", top: [7, 6, 8] },
+      { ic: "flower", bg: "#F8E4E6", fg: "#B4536A", name: "女生的美麗日常", top: [6, 5, 7] },
       { ic: "leaf",   bg: "#E4EFE3", fg: "#4F7F4C", name: "輕盈生活提案", top: [] },
       { ic: "bowl",   bg: "#F5E8DC", fg: "#9A6339", name: "外食族營養補給", top: [] },
       { ic: "chair",  bg: "#EEE7DF", fg: "#7A6250", name: "銀髮族日常補給", top: [] },
       { ic: "sprout", bg: "#E6F1E8", fg: "#3E8462", name: "成長期營養補給", top: [] },
       { ic: "baby",   bg: "#FCEBDD", fg: "#C0703A", name: "小朋友日常保養", top: [] },
-      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", top: [0, 1, 3] },
+      { ic: "paw",    bg: "#F1E9DC", fg: "#8A6A49", name: "毛孩專區", top: [0, 1] },
     ];
     let scene = 0;
     const sceneBar = document.getElementById('sceneBar');
