@@ -188,7 +188,7 @@
         <span id="mCat" class="text-xs text-stone-400"></span>
         <h3 id="mName" class="font-black text-lg leading-snug mb-2"></h3>
         <div id="mPrice" class="flex items-end gap-2 flex-wrap mb-3"></div>
-        <p id="mDesc" class="text-sm text-stone-600 leading-relaxed whitespace-pre-line mb-4"></p>
+        <div id="mDesc" class="mb-4"></div>
         <label for="mQty" class="text-sm font-bold block mb-1">數量</label>
         <select id="mQty" class="w-full border border-stone-300 rounded-xl px-3 py-2 mb-3 focus:outline-none focus:border-rose-500 bg-white"></select>
         <a id="mLine" href="#" target="_blank" class="block text-center text-base font-bold bg-[#06C755] text-white py-3 rounded-xl hover:opacity-90 transition"></a>
@@ -213,7 +213,7 @@
       { cat: "本月開團", unit: "盒", name: "Beauty Style 水嫩模式 白皙加橙發泡錠（20錠／盒）", price: 980, original: 1380, badge: "本月開團", img: "images/n/vitc.jpg", note: "義大利血橙 ROC・維生素C 1000mg・全植物來源",
         desc: "主要成分：RED ORANGE COMPLEX® 義大利西西里血橙萃取、維生素 C 1000mg、菸鹼素 18mg、鋅 10mg、葡萄皮萃取。\n規格：20 錠／盒｜台灣製造｜成分皆為植物來源\n食用方式：每日 1 錠，以 150ml 冷（溫）水沖泡溶解後飲用，請勿直接吞食。" },
       { cat: "本月開團", unit: "瓶", name: "NutriHsieh 速疾通膠囊 PLUS（60顆／瓶）", price: 4060, original: 5980, badge: "本月開團", img: "images/n/fastsoon.jpg", note: "日本蚓激酶・西班牙橙皮萃取・8 種植萃",
-        desc: "主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取，搭配川芎、當歸、白芍、熟地、刺五加、黑棗、黑芝麻、黑胡椒萃取，以及維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n營養學博士 謝明哲 教授 研發監督。懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。" },
+        desc: "主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取、川芎萃取、當歸萃取、白芍萃取、熟地萃取、刺五加萃取、黑棗萃取、黑芝麻萃取、黑胡椒萃取、維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n營養學博士 謝明哲 教授 研發監督。懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。" },
       { cat: "本月開團", unit: "瓶", name: "Double Power 原粹藍藻錠（300顆／瓶）", price: 2250, original: 3300, badge: "本月開團", img: "images/n/spirulina.jpg", note: "美國加州螺旋藻・藻青苷 18%・全家適用",
         desc: "原料來自美國加州 Sonoran 沙漠的 Spirulina Nature 螺旋藻養殖場，藻青苷達 18%。\n含蛋白質、鈣質、β-胡蘿蔔素、鐵質等營養素。\n非基因改造・不含除草劑與殺蟲劑・不添加防腐劑・無藻毒素。\n規格：510mg × 300 錠／瓶｜原料美國加州｜素食\n食用方式：每日 5 錠，餐前或餐後配開水食用。" },
       { cat: "本月開團", unit: "盒", name: "Double Power 纖歲茶（30包／盒・奶茶／抹茶）", price: 3480, original: 5600, badge: "本月開團", img: "images/n/tea.jpg", note: "沙拉用喝的・奶茶／抹茶兩種口味",
@@ -423,13 +423,41 @@
       }
       mLine.href = `https://line.me/R/oaMessage/@mushroom131/?${encodeURIComponent(msg)}`;
     }
+    // 商品介紹排版：「主要成分／規格／食用方式」分成三塊，其他句子當簡介
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    function descHTML(d) {
+      const intro = [], blocks = [], note = [];
+      d.split('\n').map(l => l.trim()).filter(Boolean).forEach(l => {
+        const m = l.match(/^(主要成分|規格|食用方式)：(.*)$/);
+        if (m) blocks.push([m[1], m[2]]); else if (/諮詢|不宜|請勿食用|過敏/.test(l)) note.push(l); else intro.push(l);
+      });
+      if (!blocks.length) return `<p class="text-sm text-stone-600 leading-relaxed whitespace-pre-line">${esc(d)}</p>`;
+      const ICON = { 主要成分: '🌿', 規格: '📦', 食用方式: '🥄' };
+      let h = intro.length ? `<p class="text-sm text-stone-600 leading-relaxed mb-3">${intro.map(esc).join('<br>')}</p>` : '';
+      h += '<div class="rounded-2xl border border-stone-200 divide-y divide-stone-200 overflow-hidden">';
+      blocks.forEach(([k, v]) => {
+        let body;
+        if (k === '主要成分') {
+          const parts = v.replace(/。$/, '').split(/、|，/).map(x => x.trim()).filter(Boolean);
+          body = `<div class="flex flex-wrap gap-1.5">${parts.map(x => `<span class="text-[12px] bg-stone-100 text-stone-700 rounded-full px-2.5 py-1">${esc(x)}</span>`).join('')}</div>`;
+        } else if (k === '規格') {
+          body = `<div class="flex flex-wrap gap-1.5">${v.split('｜').map(x => `<span class="text-[12px] border border-stone-300 text-stone-700 rounded-full px-2.5 py-1">${esc(x.trim())}</span>`).join('')}</div>`;
+        } else {
+          body = `<p class="text-[13px] text-stone-700 leading-relaxed">${esc(v)}</p>`;
+        }
+        h += `<div class="px-3.5 py-3"><p class="text-[11px] font-bold tracking-widest text-stone-400 mb-1.5">${ICON[k]} ${k}</p>${body}</div>`;
+      });
+      h += '</div>';
+      if (note.length) h += `<p class="text-[11.5px] text-stone-400 leading-relaxed mt-2">⚠️ ${note.map(esc).join('<br>')}</p>`;
+      return h;
+    }
     function openModal(i) {
       curP = PRODUCTS[i];
       mImg.src = curP.img; mImg.alt = curP.name;
       mCat.textContent = curP.cat;
       mName.textContent = curP.name;
       mPrice.innerHTML = priceHTML(curP);
-      mDesc.textContent = curP.desc || '';
+      mDesc.innerHTML = descHTML(curP.desc || '');
       buildQty(curP);
       updateLine();
       modal.classList.remove('hidden');
