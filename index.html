@@ -57,7 +57,7 @@
   <!-- 首頁活動影片（換活動時：換 media/ 裡的影片與封面圖） -->
   <section class="max-w-6xl mx-auto px-4 pb-5">
     <div class="relative rounded-3xl overflow-hidden shadow-lg aspect-video bg-stone-100">
-      <video class="absolute inset-0 w-full h-full object-cover" src="media/hero-202611.mp4" poster="media/hero-202611.jpg"
+      <video class="absolute inset-0 w-full h-full object-cover" src="media/hero-202611.mp4?v=2" poster="media/hero-202611.jpg?v=2"
         autoplay muted loop playsinline preload="metadata" aria-label="感恩祭｜高端餐週年慶"></video>
     </div>
   </section>
@@ -184,27 +184,27 @@
     const LINE_ADD = "https://lin.ee/9M4i0Vj"; // 香菇綸爸 官方帳號（專屬ID @mushroom131 / 基本ID @507tuqaf）
     const PRODUCTS = [
       // 本月開團（保健營養）⚠️ desc 只寫成分／規格／吃法等事實，不寫功效
-      { cat: "本月開團", unit: "盒", name: "Simply 新普利 夜酵素薑黃錠 PLUS+（30錠／盒）", price: 1700, original: 2100, badge: "本月開團", img: "images/n/night.jpg", note: "專利薑黃・蔬果酵素・睡前 2 錠",
+      { cat: "本月開團", unit: "盒", name: "Simply 新普利 夜酵素薑黃錠 PLUS+（30錠／盒）", price: 1700, original: 2100, badge: "本月開團", img: "images/n/night.jpg?v=2", note: "專利薑黃・蔬果酵素・睡前 2 錠",
         desc: "主要成分：專利薑黃萃取、80 種以上綜合蔬果酵素、GABA、L-色胺酸、綜合必需胺基酸、益生菌。\n規格：0.75g × 30 錠／盒｜台灣製造｜奶素\n食用方式：每日睡前 2 錠，配合開水食用。\n孕婦、哺乳婦、服用藥物或有疾病者，請先諮詢醫師或藥師。" },
-      { cat: "本月開團", unit: "盒", name: "Double Berry 漫悅莓素食膠囊（60粒／盒）", price: 3280, original: 4800, badge: "本月開團", img: "images/n/berry.jpg", note: "蔓越莓・洛神花萼・專利益生菌・全素",
+      { cat: "本月開團", unit: "盒", name: "Double Berry 漫悅莓素食膠囊（60粒／盒）", price: 3280, original: 4800, badge: "本月開團", img: "images/n/berry.jpg?v=2", note: "蔓越莓・洛神花萼・專利益生菌・全素",
         desc: "主要成分：CystiCran®40 與 CranPure® 雙重蔓越莓萃取、洛神花萼萃取、SynForU™-HerCare 益生菌、透納葉萃取。\n規格：500mg × 60 粒／盒｜台灣製造｜全素可食\n食用方式：每日 1～2 次，每次 1 粒，配冷溫開水，飯前飯後皆可。" },
-      { cat: "本月開團", unit: "盒", name: "Beauty Style 水嫩模式 白皙加橙發泡錠（20錠／盒）", price: 980, original: 1380, badge: "本月開團", img: "images/n/vitc.jpg", note: "義大利血橙 ROC・維生素C 1000mg・全植物來源",
+      { cat: "本月開團", unit: "盒", name: "Beauty Style 水嫩模式 白皙加橙發泡錠（20錠／盒）", price: 980, original: 1380, badge: "本月開團", img: "images/n/vitc.jpg?v=2", note: "義大利血橙 ROC・維生素C 1000mg・全植物來源",
         desc: "主要成分：RED ORANGE COMPLEX® 義大利西西里血橙萃取、維生素 C 1000mg、菸鹼素 18mg、鋅 10mg、葡萄皮萃取。\n規格：20 錠／盒｜台灣製造｜成分皆為植物來源\n食用方式：每日 1 錠，以 150ml 冷（溫）水沖泡溶解後飲用，請勿直接吞食。" },
-      { cat: "本月開團", unit: "瓶", name: "NutriHsieh 速疾通膠囊 PLUS（60顆／瓶）", price: 4060, original: 5980, badge: "本月開團", img: "images/n/fastsoon.jpg", note: "日本蚓激酶・西班牙橙皮萃取・8 種植萃",
+      { cat: "本月開團", unit: "瓶", name: "NutriHsieh 速疾通膠囊 PLUS（60顆／瓶）", price: 4060, original: 5980, badge: "本月開團", img: "images/n/fastsoon.jpg?v=2", note: "日本蚓激酶・西班牙橙皮萃取・8 種植萃",
         desc: "主要成分：日本血紅素、日本專利蚓激酶萃取、西班牙專利橙皮萃取、川芎萃取、當歸萃取、白芍萃取、熟地萃取、刺五加萃取、黑棗萃取、黑芝麻萃取、黑胡椒萃取、維生素 B12、葉酸、維生素 C。\n規格：450mg × 60 顆／瓶｜台灣製造｜葷食\n食用方式：日常每日 2 顆，飯後食用。\n營養學博士 謝明哲 教授 研發監督。懷孕、哺乳或有特殊體質者，請先諮詢醫師或藥師。" },
-      { cat: "本月開團", unit: "瓶", name: "Double Power 原粹藍藻錠（300顆／瓶）", price: 2250, original: 3300, badge: "本月開團", img: "images/n/spirulina.jpg", note: "美國加州螺旋藻・藻青苷 18%・全家適用",
+      { cat: "本月開團", unit: "瓶", name: "Double Power 原粹藍藻錠（300顆／瓶）", price: 2250, original: 3300, badge: "本月開團", img: "images/n/spirulina.jpg?v=2", note: "美國加州螺旋藻・藻青苷 18%・全家適用",
         desc: "原料來自美國加州 Sonoran 沙漠的 Spirulina Nature 螺旋藻養殖場，藻青苷達 18%。\n含蛋白質、鈣質、β-胡蘿蔔素、鐵質等營養素。\n非基因改造・不含除草劑與殺蟲劑・不添加防腐劑・無藻毒素。\n規格：510mg × 300 錠／瓶｜原料美國加州｜素食\n食用方式：每日 5 錠，餐前或餐後配開水食用。" },
-      { cat: "本月開團", unit: "盒", name: "Double Power 纖歲茶（30包／盒・奶茶／抹茶）", price: 3480, original: 5600, badge: "本月開團", img: "images/n/tea.jpg", note: "沙拉用喝的・奶茶／抹茶兩種口味",
+      { cat: "本月開團", unit: "盒", name: "Double Power 纖歲茶（30包／盒・奶茶／抹茶）", price: 3480, original: 5600, badge: "本月開團", img: "images/n/tea.jpg?v=2", note: "沙拉用喝的・奶茶／抹茶兩種口味",
         desc: "膳食纖維＋多種綜合蔬果酵素＋海洋萃取元素，加水就能喝的蔬果飲。\n經檢驗不含重金屬、農藥、大腸桿菌、沙門氏桿菌、番瀉苷 A／B。\n規格：10g × 30 包／盒｜台灣製造｜奶茶／抹茶口味可選\n食用方式：每日 1 包，加入 200～250cc 溫開水攪拌均勻即可飲用。" },
-      { cat: "本月開團", unit: "盒", name: "幸福鱸魚飲 粉橘版（10瓶／盒）", price: 1860, original: 2500, badge: "本月開團", img: "images/n/bass.jpg", note: "無腥味好喝・每日 1 瓶・冰涼更好喝",
+      { cat: "本月開團", unit: "盒", name: "幸福鱸魚飲 粉橘版（10瓶／盒）", price: 1860, original: 2500, badge: "本月開團", img: "images/n/bass.jpg?v=2", note: "無腥味好喝・每日 1 瓶・冰涼更好喝",
         desc: "主要成分：濃縮乳清蛋白、魚膠原蛋白、鱸魚萃取粉、乳鐵蛋白、維生素 B 群、維生素 C、維生素 D3。\n規格：50ml × 10 瓶／盒｜台灣製造｜含奶類、魚類\n食用方式：每日 1 瓶，冰涼後飲用風味更佳。" },
-      { cat: "本月開團", unit: "罐", name: "Pures Select 南極冰鑽頂級磷蝦油 家庭號（200粒／罐）", price: 9780, original: 13900, badge: "本月開團", img: "images/n/krill.jpg", note: "挪威 Superba2 磷蝦油・DHA・蝦紅素・PS",
+      { cat: "本月開團", unit: "罐", name: "Pures Select 南極冰鑽頂級磷蝦油 家庭號（200粒／罐）", price: 9780, original: 13900, badge: "本月開團", img: "images/n/krill.jpg?v=2", note: "挪威 Superba2 磷蝦油・DHA・蝦紅素・PS",
         desc: "主要成分：挪威 Superba2™ 南極磷蝦油、紅藻萃取（蝦紅素）、大豆萃取 PS 磷脂絲胺酸、life's DHA™ 藻油、深層海洋濃縮萃取、第四代葉酸、Lipofer® 微膠囊鐵、珍珠粉、維生素 E。\n規格：200 粒／罐｜主原料產地南極・台灣包裝｜葷食\n食用方式：每日早晚各 1 粒，配溫水空腹服用，睡前最佳。\n對甲殼類及大豆過敏者請勿食用。" },
-      { cat: "本月開團", unit: "箱", name: "Meta Water 未來萃能水 貴珀香檳風味（24瓶／箱）", price: 3672, original: 6720, badge: "本月開團", img: "images/n/metawater.jpg", note: "零糖・無酒精・低咖啡因",
+      { cat: "本月開團", unit: "箱", name: "Meta Water 未來萃能水 貴珀香檳風味（24瓶／箱）", price: 3672, original: 6720, badge: "本月開團", img: "images/n/metawater.jpg?v=2", note: "零糖・無酒精・低咖啡因",
         desc: "香檳風味氣泡飲，零糖、無酒精、低咖啡因（29.7mg／100ml）。\n主要成分：異麥芽寡醣、牛磺酸、蘋果醋、紅葡萄果汁、人參葉萃取、神仙菜萃取、維生素 B2／B6／B12。\n規格：235ml × 24 瓶／箱｜台灣製造\n食用方式：每日 1 瓶，冷飲風味更佳。孩童、孕婦及哺乳婦女不宜飲用。" },
-      { cat: "本月開團", unit: "桶", name: "BoomCa+ 彈力支點 每日鈣補給軟糖（60顆桶裝・葡萄口味）", price: 1590, original: 2480, badge: "本月開團", img: "images/n/boomca.jpg", note: "每顆 125mg 鈣＋D3・K2・CPP・6 歲以上",
+      { cat: "本月開團", unit: "桶", name: "BoomCa+ 彈力支點 每日鈣補給軟糖（60顆桶裝・葡萄口味）", price: 1590, original: 2480, badge: "本月開團", img: "images/n/boomca.jpg?v=2", note: "每顆 125mg 鈣＋D3・K2・CPP・6 歲以上",
         desc: "把日常補鈣做成好咀嚼的葡萄口味軟糖，每顆含 125mg 鈣，搭配維生素 D3、K2、CPP 與維生素 C。\n適合 6 歲以上孩子、大人、外食族與不愛吞錠劑的人。\n規格：3.7g × 60 顆／桶｜台灣製造｜葷食\n食用方式：孩童每日 2 顆、成人每日 4 顆，請咀嚼食用，勿直接吞食。" },
-      { cat: "本月開團", unit: "盒", name: "Double Power 8 ComBIO 全專利雙效益生菌（60包／盒）", price: 2320, original: 4500, badge: "本月開團", img: "images/n/combio.jpg", note: "8 株專利菌種・每包 233 億・SNQ 國家品質標章",
+      { cat: "本月開團", unit: "盒", name: "Double Power 8 ComBIO 全專利雙效益生菌（60包／盒）", price: 2320, original: 4500, badge: "本月開團", img: "images/n/combio.jpg?v=2", note: "8 株專利菌種・每包 233 億・SNQ 國家品質標章",
         desc: "以 8 株全專利菌種為核心，搭配 7 種綜合酵素與益生質，每包 233 億菌數。\n可幫助維持消化道機能，連續 10 年獲 SNQ 國家品質標章。\n規格：1.5g × 60 包／盒｜台灣製造\n食用方式：每日 1～2 包，直接食用或搭配冷開水、果汁。" },
       // 主食
       { cat: "主食", unit: "包", name: "毛孩高端餐 專利凍乾益菌糧 1.15Kg／包（貓寶／狗寶營養餐）", price: 1100, original: 1680, badge: "熱銷", img: "images/P01.jpg",
