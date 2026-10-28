@@ -57,9 +57,40 @@
   <!-- 首頁活動影片（換活動時：換 media/ 裡的影片與封面圖） -->
   <section class="max-w-6xl mx-auto px-4 pb-5">
     <div class="relative rounded-3xl overflow-hidden shadow-lg aspect-video bg-stone-100">
-      <video class="absolute inset-0 w-full h-full object-cover" src="media/hero-202611.mp4?v=2" poster="media/hero-202611.jpg?v=2"
-        autoplay muted loop playsinline preload="metadata" aria-label="感恩祭｜高端餐週年慶"></video>
+      <!-- 輪流播放：影片播完 → 換圖 6 秒 → 再回影片（要加一張就多放一個 .hero-slide） -->
+      <video class="hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700" src="media/hero-202611.mp4?v=2" poster="media/hero-202611.jpg?v=2"
+        autoplay muted playsinline preload="metadata" aria-label="感恩祭｜高端餐週年慶"></video>
+      <img class="hero-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0" src="media/hero-202611-family.jpg" alt="全家換季守護組｜藍藻錠營養補給＋病毒盾居家清潔" loading="lazy">
+      <div id="heroDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2"></div>
     </div>
+    <script>
+    (function () {
+      var slides = document.querySelectorAll('.hero-slide'), dots = document.getElementById('heroDots'), cur = 0, timer;
+      var IMG_SEC = 6;
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('aria-label', '第 ' + (i + 1) + ' 張');
+        b.className = 'w-2.5 h-2.5 rounded-full bg-white/60 shadow transition-all';
+        b.onclick = function () { show(i); };
+        dots.appendChild(b);
+      });
+      function show(i) {
+        clearTimeout(timer); cur = i;
+        slides.forEach(function (el, k) {
+          el.style.opacity = k === i ? 1 : 0; el.style.zIndex = k === i ? 1 : 0;
+          if (el.tagName === 'VIDEO' && k !== i) el.pause();
+        });
+        dots.querySelectorAll('button').forEach(function (b, k) { b.className = 'h-2.5 rounded-full shadow transition-all ' + (k === i ? 'w-6 bg-white' : 'w-2.5 bg-white/60'); });
+        dots.style.zIndex = 2;
+        var el = slides[i];
+        if (el.tagName === 'VIDEO') { el.currentTime = 0; var p = el.play(); if (p && p.catch) p.catch(function () { timer = setTimeout(next, 10000); }); }
+        else timer = setTimeout(next, IMG_SEC * 1000);
+      }
+      function next() { show((cur + 1) % slides.length); }
+      slides.forEach(function (el) { if (el.tagName === 'VIDEO') el.addEventListener('ended', next); });
+      show(0);
+    })();
+    </script>
   </section>
 
   <!-- 出貨 / 付款資訊 -->
