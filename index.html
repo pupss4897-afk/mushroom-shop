@@ -279,6 +279,9 @@
       { cat: "美食", unit: "盒", name: "酷覓星 香鬆起士糙米捲（奇亞籽＋彩虹藜麥）", price: 248, original: 300, badge: "iTQi 二星", img: "images/P12.jpg", note: "2 包 $496／4 包 $922／10 包 $2110／24 包 $4912",
         desc: "糙米膨發米捲注入蛋黃內餡，外層起士＋海苔芝麻香鬆，比利時 iTQi 風味評鑑二星。\n主要成分：糙米、蛋黃內餡、起士、海苔、芝麻、奇亞籽、藜麥\n規格：10 根／80g／盒｜非油炸｜無防腐劑｜2 包 $496／4 包 $922／10 包 $2110／24 包 $4912" },
     ];
+    /* 輸入折扣碼後的價格統一 +100（2026-11，可用 $100 購物金折回）；不要加了就改成 0 */
+    const PRICE_ADD = 100;
+    PRODUCTS.forEach(p => { p.price += PRICE_ADD; });
 
     /* 情境推薦：top 放商品名稱裡的關鍵字，依序是 TOP1、TOP2、TOP3
        ⚠️ 合規：情境名稱不可暗示療效（好睡／窈窕／發育／免疫提升 都不能用） */
@@ -382,7 +385,7 @@
               <div class="flex items-end gap-2 flex-wrap min-h-[28px]">
                 ${unlocked
                   ? `<span class="text-rose-600 font-black text-lg">$${p.price}</span>
-                     <span class="text-stone-400 line-through text-xs">市售 $${p.original}</span>`
+                     ${p.original > p.price ? `<span class="text-stone-400 line-through text-xs">市售 $${p.original}</span>` : ""}`
                   : `<span class="text-stone-800 font-black text-lg">市售 $${p.original}</span>
                      <span class="text-rose-500 text-xs font-bold">🔒 折扣碼再優惠</span>`}
               </div>
@@ -438,7 +441,7 @@
 
     function priceHTML(p) {
       return unlocked
-        ? `<span class="text-rose-600 font-black text-2xl">$${p.price}</span><span class="text-stone-400 line-through text-sm">市售 $${p.original}</span>`
+        ? `<span class="text-rose-600 font-black text-2xl">$${p.price}</span>${p.original > p.price ? `<span class="text-stone-400 line-through text-sm">市售 $${p.original}</span>` : ""}`
         : `<span class="text-stone-800 font-black text-2xl">市售 $${p.original}</span><span class="text-rose-500 text-sm font-bold">🔒 輸入折扣碼再優惠</span>`;
     }
     function buildQty(p) {
